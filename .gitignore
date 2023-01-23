@@ -1,0 +1,8 @@
+.vscode
+env
+gcp
+ny_taxi_postgres_data
+pgadmin_data
+tmp
+.env
+link.txt
