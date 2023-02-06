@@ -24,10 +24,10 @@ def fetch(dataset_url: str) -> pd.DataFrame:
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     """Fix dtype issues and column names"""
     df.columns = [camel_to_snake(col) for col in df.columns]
-    # df["lpep_pickup_datetime"] = pd.to_datetime(df["lpep_pickup_datetime"])
-    # df["lpep_dropoff_datetime"] = pd.to_datetime(df["lpep_dropoff_datetime"])
-    df["tpep_pickup_datetime"] = pd.to_datetime(df["tpep_pickup_datetime"])
-    df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
+    df["lpep_pickup_datetime"] = pd.to_datetime(df["lpep_pickup_datetime"])
+    df["lpep_dropoff_datetime"] = pd.to_datetime(df["lpep_dropoff_datetime"])
+    # df["tpep_pickup_datetime"] = pd.to_datetime(df["tpep_pickup_datetime"])
+    # df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
     print(df.head(2))
     print(f"columns: {df.dtypes}")
     print(f"rows: {len(df)}")
@@ -66,7 +66,6 @@ def etl_web_to_gcs(color: str, year: int, month: int) -> None:
 
 @flow()
 def flows_to_gcs(
-    # months: list[int] = [1, 2], year: int = 2021, color: str = "yellow"
     color: str  = "yellow", year: int = 2021, months: list[int] = [1, 2]
 
 ):

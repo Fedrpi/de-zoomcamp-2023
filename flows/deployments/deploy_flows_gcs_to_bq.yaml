@@ -1,0 +1,59 @@
+###
+### A complete description of a Prefect Deployment for flow 'flows-gcs-to-bq'
+###
+name: flows_to_bq
+description: Parent ETL flow
+version: 835edbaca6dc0f3cc6442c84cec0cc47
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters:
+  color: green
+  year: 2020
+schedule: null
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: flows-gcs-to-bq
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: beaecd7d-f266-4c3b-a1af-2f2272c8a620
+  _block_document_name: anonymous-95c7ea7a-7775-4e11-adaf-8a2ca368f16a
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage: null
+path: /Users/fdr/SqlProjects/Datatalks/de_zoomcamp_2023
+entrypoint: flows/cloud/etl_gcs_to_bq.py:flows_gcs_to_bq
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    color:
+      title: color
+      position: 0
+      type: string
+    year:
+      title: year
+      position: 1
+      type: integer
+    months:
+      title: months
+      position: 2
+      type: array
+      items:
+        type: integer
+  required:
+  - color
+  - year
+  - months
+  definitions: null
