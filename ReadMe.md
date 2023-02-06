@@ -10,6 +10,8 @@
 8. Config GCP Creds, Bucket etc with Prefect UI
 9. Run default prefect agent with command ```prefect agent start --work-queue "default"```
 10. Run flows using CLI or UI
+### Homework 2: Prefect flows
+Prefect flow scripts located [here](flows)
 ## Week 1: Ingest data to local Postgress
 ### How to:
 1. Command ```docker-compose up``` will create two containers
