@@ -1,5 +1,15 @@
 # DE-ZOOMCAMP-2023
-
+## Week 2: Workflow orchestration with Prefect and GCP
+### How to Prefect:
+1. Create cloud workspace using this [docs](https://docs.prefect.io/ui/cloud-quickstart/)
+2. Install prefect with command ```pip install -U prefect```
+3. Login into cloud account with command ```prefect cloud login```
+5. Command ```prefect deployment build -n "flows_to_gcs" flows/cloud/etl_web_to_gcs.py:flows_to_gcs -a --output ./flows/deployments/deploy_flows_to_gcs.yaml``` will deploy flow to load data to datalake
+6. Command ```prefect deployment build -n "flows_to_bq" flows/cloud/etl_gcs_to_bq.py:flows_gcs_to_bq -a --output ./flows/deployments/deploy_flows_gcs_to_bq.yaml``` will deploy flow to load data from data lake to DWH
+7. Command ```prefect block register -m prefect_gcp``` will install extra blocks to config GCP
+8. Config GCP Creds, Bucket etc with Prefect UI
+9. Run default prefect agent with command ```prefect agent start --work-queue "default"```
+10. Run flows using CLI or UI
 ## Week 1: Ingest data to local Postgress
 ### How to:
 1. Command ```docker-compose up``` will create two containers

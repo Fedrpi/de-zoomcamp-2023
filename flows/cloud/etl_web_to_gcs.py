@@ -2,10 +2,16 @@ import pandas as pd
 import re
 from pathlib import Path
 from prefect import flow, task
-from prefect_gcp.cloud_storage import GcsBucket
+from prefect.filesystems import GCS
+
+# from prefect_gcp.cloud_storage import GcsBucket
+
 from random import randint
 from prefect.tasks import task_input_hash
+from prefect.blocks.notifications import SlackWebhook
 from datetime import timedelta
+
+slack_webhook_block = SlackWebhook.load("notifyslack")
 
 def camel_to_snake(name:str):
     """Function to convert camel case columns to snake_case
@@ -47,7 +53,8 @@ def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
 @task(retries=2, retry_delay_seconds=5)
 def write_gcs(path: Path) -> None:
     """Upload local parquet file to GCS"""
-    gcs_block = GcsBucket.load("dtc-zoomcamp")
+    # gcs_block = GcsBucket.load("dtc-zoomcamp")
+    gcs_block = GCS.load("dtc-zoomcamp")
     gcs_block.upload_from_path(from_path=path, to_path=path)
     return
 

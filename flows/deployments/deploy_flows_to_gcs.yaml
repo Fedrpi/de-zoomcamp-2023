@@ -3,21 +3,13 @@
 ###
 name: flows_to_gcs
 description: null
-version: 2cd88eb34406283d7544893e50b2a93c
+version: ffa32d5fc359adab51caf08f4afb1c0b
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
-parameters:
-  color: green
-  year: 2020
+parameters: {}
 schedule: null
 infra_overrides: {}
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: flows-to-gcs
-manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -26,11 +18,14 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
-  _block_document_id: 93598403-3e8a-490b-af4e-3d2343c85f21
-  _block_document_name: anonymous-15fe4127-d340-4a97-a570-b9f98c6316b2
-  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: flows-to-gcs
+manifest_path: null
 storage: null
 path: /Users/fdr/SqlProjects/Datatalks/de_zoomcamp_2023
 entrypoint: flows/cloud/etl_web_to_gcs.py:flows_to_gcs
