@@ -1,0 +1,56 @@
+###
+### A complete description of a Prefect Deployment for flow 'flows-to-gcs'
+###
+name: flows_to_gcs
+description: null
+version: ffa32d5fc359adab51caf08f4afb1c0b
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: flows-to-gcs
+manifest_path: null
+storage: null
+path: /Users/fdr/SqlProjects/Datatalks/de_zoomcamp_2023
+entrypoint: flows/cloud/etl_web_to_gcs.py:flows_to_gcs
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    color:
+      title: color
+      default: yellow
+      position: 0
+      type: string
+    year:
+      title: year
+      default: 2021
+      position: 1
+      type: integer
+    months:
+      title: months
+      default:
+      - 1
+      - 2
+      position: 2
+      type: array
+      items:
+        type: integer
+  required: null
+  definitions: null
