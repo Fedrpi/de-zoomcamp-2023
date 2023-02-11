@@ -6,3 +6,4 @@ pgadmin_data
 tmp
 .env
 link.txt
+data/*

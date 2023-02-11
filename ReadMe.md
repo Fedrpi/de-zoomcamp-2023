@@ -1,4 +1,8 @@
 # DE-ZOOMCAMP-2023
+
+## Week 3: DWH with BigQuery
+### Homework 3: SQL queries
+SQL queries file with homework 1 located [here](sql/bq.sql)
 ## Week 2: Workflow orchestration with Prefect and GCP
 ### How to Prefect:
 1. Create cloud workspace using this [docs](https://docs.prefect.io/ui/cloud-quickstart/)
