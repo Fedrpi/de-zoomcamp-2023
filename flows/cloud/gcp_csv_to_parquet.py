@@ -76,7 +76,7 @@ def convert_csv_to_parquet_gcp(raw_path:str,
 
 @flow()
 def convert_loop_csv_to_parquet_gcp(months:list,
-                                    year:int,
+                                    years:list[int],
                                     raw_path:str, 
                                     raw_name:str, 
                                     parquet_path:str, 
@@ -92,19 +92,20 @@ def convert_loop_csv_to_parquet_gcp(months:list,
     :param str parquet_name: target file name
     :param dict column_types: column names and types mapping
     """
-    for month in months:
-        raw_name = raw_name.format(year=year, month=month)
-        parquet_name = parquet_name.format(year=year, month=month)
-        convert_csv_to_parquet_gcp(raw_path, 
-                                   raw_name, 
-                                   parquet_path, 
-                                   parquet_name,
-                                   column_types)
+    for year in years:
+        for month in months:
+            raw_name = raw_name.format(year=year, month=month)
+            parquet_name = parquet_name.format(year=year, month=month)
+            convert_csv_to_parquet_gcp(raw_path, 
+                                    raw_name, 
+                                    parquet_path, 
+                                    parquet_name,
+                                    column_types)
     return
 
 if __name__ == "__main__":
     months = list(range(1,13))
-    year = 2019
+    year = [2019, 2020, 2021]
     raw_path = 'data/raw/fhv/'
     raw_name = 'fhv_tripdata_{year}-{month:02}.csv.gz'
     parquet_path = 'data/parquet/fhv/'
