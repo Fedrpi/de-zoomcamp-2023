@@ -18,6 +18,7 @@ def get_gcs_object(obj_path:str, obj_name:str) -> str:
     """
     gcs_block = GcsBucket.load("dtc-zoomcamp")
     print(f'Load {obj_name} from {obj_path}')
+    Path(f"{obj_path}").mkdir(parents=True, exist_ok=True)    
     gcs_block.download_object_to_path(from_path=f'{obj_path}/{obj_name}', 
                                       to_path=f'{obj_path}/{obj_name}')
     return f'{obj_path}/{obj_name}'
