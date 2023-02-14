@@ -75,7 +75,7 @@ def convert_csv_to_parquet_gcp(raw_path:str,
     write_parquet_gcs(parquet_path, df, parquet_name)
     return 
 
-@flow()
+@flow(log_prints=True)
 def convert_loop_csv_to_parquet_gcp(months:list,
                                     years:list[int],
                                     raw_path:str, 
@@ -95,6 +95,7 @@ def convert_loop_csv_to_parquet_gcp(months:list,
     """
     for year in years:
         for month in months:
+            print('Year:', year, ' Month:', month)
             raw_name = raw_name.format(year=year, month=month)
             parquet_name = parquet_name.format(year=year, month=month)
             convert_csv_to_parquet_gcp(raw_path, 
