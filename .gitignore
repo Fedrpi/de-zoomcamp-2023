@@ -8,3 +8,4 @@ tmp
 link.txt
 data/*
 logs
+**/__pycache__

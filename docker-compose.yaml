@@ -45,7 +45,7 @@ services:
   cli:
     image: prefecthq/prefect:2.8.0-python3.11
     entrypoint: "bash"
-    working_dir: "/root/flows"
+    working_dir: "/root/"
     volumes:
       - "./flows:/root/flows"
     environment:
