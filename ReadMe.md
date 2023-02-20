@@ -1,5 +1,18 @@
 # DE-ZOOMCAMP-2023
+## Week 4: DBT, LookerStudio, Metabase
+### How to dbt:
+1. Install dbt with command ```pip install dbt-<adapter>``` for BigQuery I used ```pip install dbt-bigquery```
+2. Configure your project by instruction with command ```dbt init```
+3. All models, macros, seeds located in specific folder. See config in file ```/dbt/de-zoomcamp/dbt_project.yml```
+4. To apply models run commands:
+   1.  ```dbt seed``` 
+   2.  ```dbt deps```
+   3.  ```dbt run```
 
+### Homework
+1. SQL queries with homework 4 located [here](sql/dbt.sql)
+2. [Looker datastudio dashboard](https://lookerstudio.google.com/s/r0bK19NvLCw)
+3. [Metabase dashboard](http://34.65.65.223:3000/dashboard/3-fhv-rides)
 ## Week 3: DWH with BigQuery
 ### Homework 3: SQL queries
 SQL queries file with homework 3 located [here](sql/bq.sql)
@@ -8,12 +21,12 @@ SQL queries file with homework 3 located [here](sql/bq.sql)
 1. Create cloud workspace using this [docs](https://docs.prefect.io/ui/cloud-quickstart/)
 2. Install prefect with command ```pip install -U prefect```
 3. Login into cloud account with command ```prefect cloud login```
-5. Command ```prefect deployment build -n "flows_to_gcs" flows/cloud/etl_web_to_gcs.py:flows_to_gcs -a --output ./flows/deployments/deploy_flows_to_gcs.yaml``` will deploy flow to load data to datalake
-6. Command ```prefect deployment build -n "flows_to_bq" flows/cloud/etl_gcs_to_bq.py:flows_gcs_to_bq -a --output ./flows/deployments/deploy_flows_gcs_to_bq.yaml``` will deploy flow to load data from data lake to DWH
-7. Command ```prefect block register -m prefect_gcp``` will install extra blocks to config GCP
-8. Config GCP Creds, Bucket etc with Prefect UI
-9. Run default prefect agent with command ```prefect agent start --work-queue "default"```
-10. Run flows using CLI or UI
+4. Command ```prefect deployment build -n "flows_to_gcs" flows/cloud/etl_web_to_gcs.py:flows_to_gcs -a --output ./flows/deployments/deploy_flows_to_gcs.yaml``` will deploy flow to load data to datalake
+5. Command ```prefect deployment build -n "flows_to_bq" flows/cloud/etl_gcs_to_bq.py:flows_gcs_to_bq -a --output ./flows/deployments/deploy_flows_gcs_to_bq.yaml``` will deploy flow to load data from data lake to DWH
+6. Command ```prefect block register -m prefect_gcp``` will install extra blocks to config GCP
+7. Config GCP Creds, Bucket etc with Prefect UI
+8. Run default prefect agent with command ```prefect agent start --work-queue "default"```
+9.  Run flows using CLI or UI
 ### Homework 2: Prefect flows
 Prefect flow scripts located [here](flows)
 ## Week 1: Ingest data to local Postgress
