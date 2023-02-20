@@ -83,6 +83,21 @@ services:
       - metabase:/metabase-data
     profiles: ["metabase"]
 
+  dbt-docs:
+    image: ghcr.io/dbt-labs/dbt-bigquery:1.4.0
+    volumes:
+      - .:/root/dbt
+      - ~/.dbt:/root/.dbt
+    working_dir: /root/dbt/de_zoomcamp
+    environment:
+      - DBT_PROFILES_DIR=/root/.dbt
+      - DBT_PROFILE=de-zoomcamp
+      - DBT_PROJECT_DIR=/root/dbt/de-zoomcamp
+    ports:
+      - 8080:8080
+    entrypoint: ["dbt", "docs", "serve"]
+    profiles: ["dbt-docs"]
+
 volumes:
   prefect:
   db:
