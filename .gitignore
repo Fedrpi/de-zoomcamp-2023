@@ -7,3 +7,5 @@ tmp
 .env
 link.txt
 data/*
+logs
+**/__pycache__

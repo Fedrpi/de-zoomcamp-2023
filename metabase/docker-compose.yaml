@@ -1,0 +1,28 @@
+version: '3'
+services:
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=metabase
+      - MB_DB_PORT=6432
+      - MB_DB_USER=metabase
+      - MB_DB_PASS=metabase
+      - MB_DB_HOST=db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=metabase
+      - POSTGRES_USER=metabase
+      - POSTGRES_PASSWORD=metabase
+      - PGPORT=6432
+    ports:
+      - "6432:6432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:

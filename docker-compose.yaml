@@ -1,34 +1,93 @@
 version: '3'
-
 services:
-  postgres:
-    container_name: nytaxi_db
-    image: postgres:13
+  ### Prefect Database
+  database:
+    image: postgres:15.2-alpine
+    restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - "./ny_taxi_postgres_data:/var/lib/postgresql/data"
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    expose:
+      - 5432
+    volumes: 
+      - db:/var/lib/postgresql/data
+    profiles: ["server"]
 
-  pgadmin:
-    container_name: ny_pgadmin
-    image: dpage/pgadmin4
+  ### Prefect Server API and UI
+  server:
+    image: prefecthq/prefect:2.8.0-python3.11
+    restart: always
+    volumes:
+      - prefect:/root/.prefect
+    entrypoint: ["prefect", "orion", "start"]
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    volumes:
-      - "./pgadmin_data:/var/lib/pgadmin"
+      - PREFECT_API_URL=${PREFECT_API_HOST}/api
+      - PREFECT_ORION_API_HOST=0.0.0.0
+      - PREFECT_ORION_DATABASE_CONNECTION_URL=postgresql+asyncpg://postgres:postgres@database:5432/prefect
     ports:
-      - "80:80"
-    networks:
-      - postgres
+      - 4200:4200
+    depends_on:
+      - database
+    profiles: ["server"]
 
+  ## Prefect Agent
+  agent:
+    image: prefecthq/prefect:2.8.0-python3.11
+    restart: always
+    entrypoint: ["prefect", "agent", "start", "-q", "YOUR_WORK_QUEUE_NAME"]
+    environment:
+      - PREFECT_API_URL=http://server:4200/api
+    profiles: ["agent"]
+
+  ### Prefect CLI
+  cli:
+    image: prefecthq/prefect:2.8.0-python3.11
+    entrypoint: "bash"
+    working_dir: "/root/"
+    volumes:
+      - "./flows:/root/flows"
+    environment:
+      - PREFECT_API_URL=http://server:4200/api
+    profiles: ["cli"]
+
+  ### Metabase DB
+  metabase_db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${MB_POSTGRES_DB}
+      - POSTGRES_USER=${MB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - PGPORT=6432
+    ports:
+      - 6432:6432
+    volumes:
+      - mbdb:/var/lib/postgresql/data
+    profiles: ["metabase"]
+
+  ### Metabase_app
+  metabase_app:
+    image: metabase/metabase
+    ports:
+      - 3000:3000
+    depends_on:
+      - metabase_db
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=${MB_DB_DBNAME}
+      - MB_DB_PORT=6432
+      - MB_DB_USER=${MB_DB_USER}
+      - MB_DB_PASS=${MB_DB_PASS}
+      - MB_DB_HOST=metabase_db
+    volumes:
+      - metabase:/metabase-data
+    profiles: ["metabase"]
+
+volumes:
+  prefect:
+  db:
+  mbdb:
+  metabase:
 networks:
-  postgres:
-    driver: bridge
-
+  default:
+    name: prefect-network
