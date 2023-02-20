@@ -1,6 +1,5 @@
-version: "3.9"
+version: '3'
 services:
-
   ### Prefect Database
   database:
     image: postgres:15.2-alpine
@@ -51,10 +50,44 @@ services:
     environment:
       - PREFECT_API_URL=http://server:4200/api
     profiles: ["cli"]
-      
+
+  ### Metabase DB
+  metabase_db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${MB_POSTGRES_DB}
+      - POSTGRES_USER=${MB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - PGPORT=6432
+    ports:
+      - 6432:6432
+    volumes:
+      - mbdb:/var/lib/postgresql/data
+    profiles: ["metabase"]
+
+  ### Metabase_app
+  metabase_app:
+    image: metabase/metabase
+    ports:
+      - 3000:3000
+    depends_on:
+      - metabase_db
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=${MB_DB_DBNAME}
+      - MB_DB_PORT=6432
+      - MB_DB_USER=${MB_DB_USER}
+      - MB_DB_PASS=${MB_DB_PASS}
+      - MB_DB_HOST=metabase_db
+    volumes:
+      - metabase:/metabase-data
+    profiles: ["metabase"]
+
 volumes:
   prefect:
   db:
+  mbdb:
+  metabase:
 networks:
   default:
     name: prefect-network
