@@ -34,5 +34,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   de_zoomcamp:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+
+seeds: 
+    de_zoomcamp:
+        taxi_zone_lookup:
+            +column_types:
+                location_id: numeric
+                borough: string
+                zone: string
+                service_zone: string
+
+vars:
+  payment_type_values: [1, 2, 3, 4, 5, 6]
