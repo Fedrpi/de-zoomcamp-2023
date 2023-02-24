@@ -99,6 +99,16 @@ services:
     entrypoint: ["dbt", "docs", "serve"]
     profiles: ["dbt-docs"]
 
+  dbt-elementary:
+    image: nginx:1.23
+    volumes:
+      - "./dbt/de_zoomcamp/elementary:/usr/share/nginx/html"
+    ports:
+      - 8081:8081
+    entrypoint: ["nginx"]
+    profiles: ["dbt-elementary"]
+
+
 volumes:
   prefect:
   db:
