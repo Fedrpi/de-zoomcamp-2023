@@ -81,9 +81,9 @@ def convert_loop_csv_to_parquet_gcp(months:list,
                                     years:list[int],
                                     service_name:str,
                                     raw_path:str, 
-                                    raw_name:str, 
+                                    raw_name_template:str, 
                                     parquet_path:str, 
-                                    parquet_name:str) -> None:
+                                    parquet_name_template:str) -> None:
     """Orchestrate loop
 
     :param list months: list of month to create file names
@@ -108,9 +108,9 @@ def convert_loop_csv_to_parquet_gcp(months:list,
                                                         year=year, 
                                                         month=month)
             convert_csv_to_parquet_gcp(raw_path, 
-                                       raw_name, 
+                                       raw_name_template, 
                                        parquet_path, 
-                                       parquet_name,
+                                       parquet_name_template,
                                        column_types,
                                        parquet_schema)
     return
