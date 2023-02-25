@@ -13,6 +13,8 @@
 1. SQL queries with homework 4 located [here](sql/dbt.sql)
 2. [Looker datastudio dashboard](https://lookerstudio.google.com/s/r0bK19NvLCw)
 3. [Metabase dashboard](http://34.65.65.223:3000/dashboard/3-fhv-rides)
+4. [Dbt-docs](http://34.65.65.223:8080)
+5. [Dbt-elementary-report](http://34.65.65.223:8081/#/report/dashboard)
 ## Week 3: DWH with BigQuery
 ### Homework 3: SQL queries
 SQL queries file with homework 3 located [here](sql/bq.sql)
