@@ -103,9 +103,11 @@ services:
     image: nginx:1.23
     volumes:
       - "./dbt/de_zoomcamp/elementary:/usr/share/nginx/html"
+    environment:
+      - NGINX_PORT=8081
     ports:
       - 8081:8081
-    entrypoint: ["nginx"]
+    # entrypoint: ["nginx"]
     profiles: ["dbt-elementary"]
 
 
