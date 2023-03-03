@@ -100,7 +100,7 @@ services:
     profiles: ["dbt-docs"]
 
   dbt-elementary:
-    image: nginx:1.23
+    image: nginx:alpine
     volumes:
       - "./dbt/de_zoomcamp/elementary:/usr/share/nginx/html"
     ports:
