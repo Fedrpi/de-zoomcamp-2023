@@ -1,4 +1,7 @@
 # DE-ZOOMCAMP-2023
+## Week 5: Spark
+### Homework:
+Jupyter notebook with Spark homework 5 located [here](spark/nb/spark_hw.ipynb)
 ## Week 4: DBT, LookerStudio, Metabase
 ### How to dbt:
 1. Install dbt with command ```pip install dbt-<adapter>``` for BigQuery I used ```pip install dbt-bigquery```
