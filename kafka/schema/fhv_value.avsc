@@ -1,0 +1,40 @@
+ { 
+  "namespace": "com.datatalksclub.taxi",
+  "type": "record",
+  "name": "fhvRecordValue",
+  "fields": [
+    {
+      "name": "dispatching_base_num",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "pickup_datetime",
+      "type": "string"
+    },
+    {
+      "name": "dropOff_datetime",
+      "type": "string"
+    },
+    {
+      "name": "PUlocationID",
+      "type": ["null", "float"],
+      "default": null
+    },
+    {
+      "name": "DOlocationID",
+      "type": ["null", "float"],
+      "default": null
+    },
+    {
+      "name": "SR_Flag",
+      "type": ["null", "float"],
+      "default": null
+    },
+    {
+      "name": "Affiliated_base_number",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}

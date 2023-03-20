@@ -1,0 +1,12 @@
+ { 
+  "namespace": "com.datatalksclub.taxi",
+  "type": "record",
+  "name": "fhvRecordKey",
+  "fields": [
+    {
+      "name": "PUlocationID",
+      "type": ["null", "int"],
+      "default": null
+    }
+  ]
+}
