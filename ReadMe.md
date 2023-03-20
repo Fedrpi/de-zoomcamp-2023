@@ -1,4 +1,9 @@
 # DE-ZOOMCAMP-2023
+
+## Week 6: Kafka Streaming
+
+### Homework
+Homework 6 located [here](kafka/)
 ## Week 5: Spark
 ### Homework:
 Jupyter notebook with Spark homework 5 located [here](spark/nb/spark_hw.ipynb)
